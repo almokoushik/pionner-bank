@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pionner Bank</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+    <div id="login-area">
+        <h1 class="text-center">Welcome to Pioneer Bank</h1>
+            <div class="login-info">
+                <input type="text" placeholder="Enter Email" class="form-control">
+                <br>
+                <input class="form-control" type="password" placeholder="Enter Password">
+                <br>
+                <button id="enter"class="btn btn-success">Enter</button>
+            </div>
+            
+    </div>
+    <div id="transection-area">
+        <div class="row">
+            <div class="col-md-4  ">
+                <div class="accinfo deposite">
+                    <h3 >Deposite</h3>
+                    <h4 >$<span id="depositeBalance">00</span></h4>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="accinfo withdraw">
+                    <h3>Withdraw</h3>
+                    <h4 >$<span id="withdrawBalance">00</span></h4>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="accinfo  balance">
+                    <h3>Balance</h3>
+                    <h4 >$<span id="totalBalance">1240</span> </h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="login-info">
+                    <h3>Deposite</h3>
+                    <input type="text" placeholder="$ Ammount you want to Deposite" name="" id="inputDeposite" class="form-control"><br>
+                    <button id="addDeposite" class="btn btn-success">Deposite</button>
+                </div>
+            </div>
+            <div class="col-md-6 ">
+                <div class="login-info">
+                    <h3>Withdraw</h3>
+                    <input type="text" placeholder="$ Ammount You Want to Withdraw" name="" id="inputWithdraw" class="form-control"><br>
+                    <button id="addWithdraw"class="btn btn-success">Withdraw</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var enter= document.getElementById("login-area")
+        document.getElementById("enter").addEventListener("click",function(event){
+            enter.style.display='none';
+        const tran=document.getElementById("transection-area")
+            
+            tran.style.display="inline"
+        })
+        function inputCalculation(inputDataId,storeDataId,storeTotalDataId){
+            var newDeposite = document.getElementById(inputDataId).value
+            newDeposite = parseFloat(newDeposite)
+            oldDeposite = parseFloat(document.getElementById(storeDataId).innerText)
+            totalDeposite = newDeposite + oldDeposite
+            document.getElementById(storeDataId).innerText = totalDeposite
+
+            var oldBalance=parseFloat(document.getElementById(storeTotalDataId).innerText)
+            document.getElementById(storeTotalDataId).innerText=oldBalance+newDeposite
+
+            document.getElementById(inputDataId).value = ""
+            
+        }
+
+
+        //Deposite Calculation
+        document.getElementById("addDeposite").addEventListener("click",function(event){
+            inputCalculation("inputDeposite","depositeBalance","totalBalance")
+           
+            // var newDeposite=document.getElementById("inputDeposite").value
+            // newDeposite=parseFloat(newDeposite)
+            // oldDeposite=parseFloat(document.getElementById("depositeBalance").innerText)
+            // totalDeposite=newDeposite+oldDeposite
+            // document.getElementById("depositeBalance").innerText=totalDeposite
+
+            // oldTotal = parseFloat(document.getElementById("totalBalance").innerText)
+            // document.getElementById("totalBalance").innerText=oldTotal+newDeposite
+            // document.getElementById("inputDeposite").value=""
+                       
+        })
+        //WithDraw Calculation
+
+        document.getElementById("addWithdraw").addEventListener("click",function(event){
+
+             var oldWithdraw=parseFloat(document.getElementById("withdrawBalance").innerText)
+
+            var total=parseFloat(document.getElementById("totalBalance").innerText)
+
+            var withdrawInput=parseFloat(document.getElementById("inputWithdraw").value)
+            document.getElementById("withdrawBalance").innerText=oldWithdraw+withdrawInput
+            document.getElementById("totalBalance").innerText=total-withdrawInput
+
+            document.getElementById("inputWithdraw").value=""
+        })
+    </script>
+    
+</body>
+</html>
